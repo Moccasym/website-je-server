@@ -4,6 +4,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,14 +24,25 @@ const transporter = nodemailer.createTransport({
   
 });
 
-
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com/'];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy violation'));
+    }
+  },
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // Define a route to handle POST requests to /send-email
 app.post('/send-email', (req, res) => {
   const { email, subject, message } = req.body;
 
   const mailOptions = {
-    from: `Josuaehlers.de Kontakt`, // Display name and your email
+    from: `Josuaehlers.de <felix.steinchen94@googlemail.com>`, // Display name and your email
     to: process.env.MAIL_USER, // Your email where you want to receive messages
     subject: `Betreff: ${subject}`,
     text: `Message from: ${email}\n\nMessage: ${message}`,
