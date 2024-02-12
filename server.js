@@ -26,12 +26,12 @@ const transporter = nodemailer.createTransport({
   
 });
 
-app.use(cors());
+// app.use(cors());
 
-// const corsOptions = {
-//   origin: 'https://website-je-josuaehlers-de.onrender.com',
-//   optionsSuccessStatus: 200 // For legacy browser support
-// };
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com', 'https://josuaehlers.de'],
+  optionsSuccessStatus: 200 // For legacy browser support
+};
 
 // const corsOptions = {
 //   origin: function (origin, callback) {
@@ -44,7 +44,7 @@ app.use(cors());
 //   },
 //   optionsSuccessStatus: 200
 // };
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Define a route to handle POST requests to /send-email
 app.post('/send-email', (req, res) => {
