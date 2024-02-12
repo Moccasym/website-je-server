@@ -10,6 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
+// Enable CORS for all responses
+
 
 // Create a Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -24,18 +26,25 @@ const transporter = nodemailer.createTransport({
   
 });
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com/'];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS policy violation'));
-    }
-  },
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+app.use(cors());
+
+// const corsOptions = {
+//   origin: 'https://website-je-josuaehlers-de.onrender.com',
+//   optionsSuccessStatus: 200 // For legacy browser support
+// };
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     const allowedOrigins = ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com'];
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('CORS policy violation'));
+//     }
+//   },
+//   optionsSuccessStatus: 200
+// };
+// app.use(cors(corsOptions));
 
 // Define a route to handle POST requests to /send-email
 app.post('/send-email', (req, res) => {
