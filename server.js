@@ -51,7 +51,7 @@ app.post('/send-email', (req, res) => {
   const { email, subject, message } = req.body;
 
   const mailOptions = {
-    from: `Josuaehlers.de <felix.steinchen94@googlemail.com>`, // Display name and your email
+    from: `Josuaehlers.de Kontakt`, // Display name and your email
     to: process.env.MAIL_USER, // Your email where you want to receive messages
     subject: `Betreff: ${subject}`,
     text: `Message from: ${email}\n\nMessage: ${message}`,
