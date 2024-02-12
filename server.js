@@ -51,12 +51,12 @@ app.post('/send-email', (req, res) => {
   const { email, subject, message } = req.body;
 
   const mailOptions = {
-    from: `Josuaehlers.de Kontakt`, // Display name and your email
+    from: `"Josuaehlers.de Kontakt" <${process.env.MAIL_USER}>`, // Display name and your email
     to: process.env.MAIL_USER, // Your email where you want to receive messages
     subject: `Betreff: ${subject}`,
-    text: `Message from: ${email}\n\nMessage: ${message}`,
+    text: `Nachricht von: ${email}\n\nNachricht: ${message}`,
     // Or if you want to use HTML content:
-    html: `<p><strong>Message from:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
+    html: `<p><strong>Nachricht von:</strong> ${email}</p><p><strong>Nachricht:</strong> ${message}</p>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
