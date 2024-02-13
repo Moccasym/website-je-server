@@ -29,7 +29,7 @@ const transporter = nodemailer.createTransport({
 // app.use(cors());
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com', 'https://josuaehlers.de'],
+  origin: ['http://localhost:3000', 'https://website-je-josuaehlers-de.onrender.com', 'https://www.josuaehlers.com', 'https://josuaehlers.com'],
   optionsSuccessStatus: 200 // For legacy browser support
 };
 
